@@ -1,6 +1,6 @@
+{-# LANGUAGE DeriveDataTypeable #-}
 module Latex
-  ( templateToString 
-  , texString
+  ( texString
   , writeTexStdOut
   , writeTexToFile
   ) where
@@ -10,7 +10,8 @@ import System.IO
 import Lib
 
 texString :: Arguments -> String
-texString a = intercalate "\n" [ assembleFileHeader a
+texString (Install {}) = error "Cannot form a LaTeX string while installing"
+texString a@Run {} = intercalate "\n" [ assembleFileHeader a
                                , assemblePackages $ pkg a
                                , beginDocument
                                , makeTitle
@@ -47,7 +48,9 @@ texString a = intercalate "\n" [ assembleFileHeader a
     assemblePackages = intercalate "\n" . map formPackageString
 
 writeTexStdOut :: Arguments -> IO ()
+writeTexStdOut Install{} = error "Cannot form a LaTeX string while installing"
 writeTexStdOut a = putStrLn $ texString a
 
 writeTexToFile :: Arguments -> IO ()
+writeTexToFile Install {} = error "Cannot form a LaTeX string while installing"
 writeTexToFile a = writeFile (fileName a) (texString a)

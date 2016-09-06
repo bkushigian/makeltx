@@ -5,5 +5,5 @@ import Lib
 import Latex
 
 main = do 
-  parsedArgs <- cmdArgs defaultArgs
+  parsedArgs <- cmdArgs run
   writeTexToFile parsedArgs

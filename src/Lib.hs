@@ -1,15 +1,16 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 module Lib
     ( printArgs
-    , defaultArgs
+    , run
+    , install
+    , Arguments(..)
     ) where
 
 import System.Console.CmdArgs.Implicit
 import Data.List
 
-
 -- Hold arguments for program
-data Arguments = Run
+data Arguments = Install | Run
   { docType        :: String
   , fontSize       :: String
   , docSides       :: String
@@ -20,9 +21,9 @@ data Arguments = Run
   , date           :: String
   , title          :: String
   , subTitle       :: String
-  , notes :: [String]
+  , notes          :: [String]
   , fileName       :: FilePath
-  } | Install 
+  } 
   deriving (Show, Data, Typeable)
 
 -- defaultArgs Default Arguments
@@ -43,6 +44,7 @@ run = Run
 
 install = Install
 
+-- for debugging arguments
 printArgs :: Arguments -> IO ()
 printArgs a = do
   putStrLn $ "docType:        " ++  docType a
