@@ -2,6 +2,8 @@
 *.swp
 #for temporary work
 tmp/
+*.tex
+
 dist
 dist-*
 cabal-dev
