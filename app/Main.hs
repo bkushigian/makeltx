@@ -4,5 +4,5 @@ import System.Console.CmdArgs.Implicit
 import Lib
 
 main = do 
-  parsedArgs <- cmdArgs arguments
-  printArgs parsedArgs
+  parsedArgs <- cmdArgs defaultArgs
+  writeTexToFile parsedArgs
