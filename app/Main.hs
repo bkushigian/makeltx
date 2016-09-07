@@ -10,6 +10,7 @@ main = do
   handleArgs parsedArgs
 
 handleArgs :: Arguments -> IO ()
-handleArgs Install {}   = runInstaller
-handleArgs a@Run {}     = writeTexToFile a
+handleArgs Install {}     = runInstaller
+handleArgs a@Template {}  = writeTemplateToFile a
+handleArgs a@Run {}       = writeTexToFile a
   

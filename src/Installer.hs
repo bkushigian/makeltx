@@ -3,6 +3,7 @@ module Installer (runInstaller ) where
 import System.Directory
 import System.IO
 
+-- Naive Installer - no options
 runInstaller = do
   mldir <- getAppUserDataDirectory "makeltx_installer"
   let mlpkg     = mldir ++ "/package-lists"

@@ -49,8 +49,14 @@ texString a@Run {} = intercalate "\n" [ assembleFileHeader a
 
 writeTexStdOut :: Arguments -> IO ()
 writeTexStdOut Install{} = error "Cannot form a LaTeX string while installing"
+writeTexStdOut Template{} = error "writeTexStdOut(Template)!! unimplemented"
 writeTexStdOut a = putStrLn $ texString a
 
 writeTexToFile :: Arguments -> IO ()
-writeTexToFile Install {} = error "Cannot form a LaTeX string while installing"
-writeTexToFile a = writeFile (fileName a) (texString a)
+writeTexToFile Install {}  = error "Cannot form a LaTeX string while installing"
+writeTexToFile Template {} = error "writeTexToFile(Template)!! unimplemented"
+writeTexToFile a           = writeFile (fileName a) (texString a)
+
+writeTemplateToFile :: Arguments -> IO ()
+writeTemplateToFile 
+
