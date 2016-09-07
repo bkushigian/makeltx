@@ -13,6 +13,9 @@ texString :: Arguments -> String
 texString (Install {}) = error "Cannot form a LaTeX string while installing"
 texString a@Run {} = intercalate "\n" [ assembleFileHeader a
                                , assemblePackages $ pkg a
+                               , "\\author{" ++ author a ++ "}"
+                               , "\\title{"  ++ title  a ++ "}"
+                               , "\\date{"   ++ date   a ++ "}"
                                , beginDocument
                                , makeTitle
                                , documentBody
