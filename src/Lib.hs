@@ -1,7 +1,6 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 module Lib
-    ( printArgs
-    , run
+    ( run
     , install
     , Arguments(..)
     ) where
@@ -43,20 +42,4 @@ run = Run
   }
 
 install = Install
-
--- for debugging arguments
-printArgs :: Arguments -> IO ()
-printArgs a = do
-  putStrLn $ "docType:        " ++  docType a
-  putStrLn $ "fontSize:       " ++ fontSize a
-  putStrLn $ "docSides:       " ++ docSides a
-  putStrLn $ "paperSize:      " ++ paperSize a
-  putStrLn $ "packages:       " ++ intercalate "," (pkg a)
-  putStrLn $ "imports:        " ++ intercalate "," (imports a)
-  putStrLn $ "author:         " ++ author a
-  putStrLn $ "date:           " ++ date a
-  putStrLn $ "title:          " ++ title a
-  putStrLn $ "subTitle:       " ++ subTitle a
-  putStrLn $ "notes:          " ++ intercalate "\n%% " (replicate 80 '%' : notes a)
-  putStrLn $ "output file:    " ++ fileName a
 
