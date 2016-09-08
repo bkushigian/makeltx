@@ -21,6 +21,8 @@ library
   build-depends:       base >= 4.7 && < 5
                      , cmdargs
                      , directory
+                     , filepath
+                     , download
   default-language:    Haskell2010
 
 executable makeltx-exe
@@ -30,6 +32,8 @@ executable makeltx-exe
   build-depends:       base
                      , makeltx
                      , cmdargs
+                     , filepath
+                     , directory
   default-language:    Haskell2010
 
 test-suite makeltx-test

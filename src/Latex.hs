@@ -3,9 +3,12 @@ module Latex
   ( texString
   , writeTexStdOut
   , writeTexToFile
+  , writeTemplateToFile
   ) where
 import Data.List
 import System.IO
+import System.Directory
+import System.FilePath.Posix
 
 import Lib
 
@@ -49,6 +52,14 @@ texString a@Run {} = intercalate "\n" [ assembleFileHeader a
       "\\usepackage" ++ pkgOpt ++ ( '{' : (pkgName ++ "}"))
 
     assemblePackages = intercalate "\n" . map formPackageString
+templateString :: Arguments -> IO String
+templateString Install {} = error "Install is not a Template"
+templateString Run {}     = error "Run is not a Template"
+templateString a@Template {} = do
+  appDir <- getAppUserDataDirectory programName 
+  let filePath = appDir </> "templates" </> name_ a
+  readFile filePath
+  
 
 writeTexStdOut :: Arguments -> IO ()
 writeTexStdOut Install{} = error "Cannot form a LaTeX string while installing"
@@ -61,5 +72,9 @@ writeTexToFile Template {} = error "writeTexToFile(Template)!! unimplemented"
 writeTexToFile a           = writeFile (fileName a) (texString a)
 
 writeTemplateToFile :: Arguments -> IO ()
-writeTemplateToFile 
+writeTemplateToFile Install {} = error "Install is not a template"
+writeTemplateToFile Run {}     = error "Run is not a template"
+writeTemplateToFile a = do 
+  contents <- templateString a
+  writeFile (fileName a) contents
 

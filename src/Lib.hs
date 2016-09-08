@@ -1,13 +1,19 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 module Lib
-    ( run
-    , install
+    ( install
+    , programName
+    , readDataFile
+    , run
     , template
     , Arguments(..)
     ) where
 
-import System.Console.CmdArgs.Implicit
 import Data.List
+import System.Console.CmdArgs.Implicit
+import System.Directory
+import System.FilePath.Posix
+
+programName = "makeltx"
 
 -- Hold arguments for program
 data Arguments = Install | Run
@@ -24,11 +30,12 @@ data Arguments = Install | Run
   , notes          :: [String]
   , fileName       :: FilePath
   } | Template 
-  { name            :: String
-  , filepath        :: FilePath
+  { name_           :: String
+  , file            :: FilePath
   , url             :: String
   , showall         :: Bool
   , download        :: String
+  , fileName        :: FilePath
   }
 
   deriving (Show, Data, Typeable)
@@ -51,11 +58,19 @@ run = Run
 
 -- Default Template arguments
 template = Template
-  { name        = "" &= help "Name of installed template"
-  , filepath    = "" &= help "Path to template outside of install path"
+  { name_        = "" &= help "Name of installed template"
+  , file         = "" &= help "Path to template outside of install path"
   , url         = "" &= help "Url of template to download to current directory"
-  , install     = "" &= help "Install template by url"
+  , showall     = False &= help "Show all local templates"
+  , download    = "" &= help "Install template by url"
+  , fileName    = "" &= help "Name of created tex file"
   }
 install = Install
+
+readDataFile :: FilePath -> IO String
+readDataFile f = do
+  mldir <- getAppUserDataDirectory programName
+  let filePath = mldir </> f
+  readFile filePath
 
 
