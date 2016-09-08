@@ -31,7 +31,7 @@ if [ -d $mldir ] ; then
   echo "Pulling down $mldir/templates.tar.gz..."
   wget -O "$mldir/templates.tar.gz" "$url/templates/templates.tar.gz"
   echo "Extracting tarball to $mldir/templates"
-  tar -xzvf $mldir/templates.tar.gz $mldir/templates
+  tar -xzvf $mldir/templates.tar.gz -C $mldir
   echo "Deleting tarball"
   rm $mldir/templates.tar.gz
 else

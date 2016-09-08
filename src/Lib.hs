@@ -29,13 +29,14 @@ data Arguments = Install | Run
   , subTitle       :: String
   , notes          :: [String]
   , fileName       :: FilePath
+  , getConfDir     :: Bool
   } | Template 
   { name_           :: String
   , file            :: FilePath
   , url             :: String
   , showall         :: Bool
   , download        :: String
-  , fileName        :: FilePath
+  --, fileName        :: FilePath
   }
 
   deriving (Show, Data, Typeable)
@@ -54,16 +55,17 @@ run = Run
   , subTitle    = ""          &= help "...... and have you seen my pants???????"
   , notes       = []          &= help "Comments on header"
   , fileName    = "main.tex"  &= help "Name of tex file to be created"
+  , getConfDir  = False       &= help "Get configuration directory path and exit."
   }
 
 -- Default Template arguments
 template = Template
   { name_        = "" &= help "Name of installed template"
-  , file         = "" &= help "Path to template outside of install path"
-  , url         = "" &= help "Url of template to download to current directory"
+  , file         = "" &= help "Path to template outside of install path !! NOT IMPL"
+  , url         = "" &= help "Url of template to download to current directory NOT IMPL"
   , showall     = False &= help "Show all local templates"
-  , download    = "" &= help "Install template by url"
-  , fileName    = "" &= help "Name of created tex file"
+  , download    = "" &= help "Install template by url !! NOT IMPL"
+  --, fileName    = "" &= help "Name of created tex file"
   }
 install = Install
 
