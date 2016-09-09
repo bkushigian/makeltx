@@ -23,7 +23,12 @@ Finally, you will need to get some templates. Unfortunately, template download i
 `makeltx --help` gives a quick help message. There are three run modes: `install`, `run`, and `template`.
 
 The easiest way to get started is to enter:
-`makeltx template MathHomework` and it will create a brand new template for you! I'll be adding more templates soon.
+
+``` bash
+$ makeltx template --name MathHomework
+```` 
+
+and it will create a brand new template for you! I'll be adding more templates soon.
 To see a complete list of installed templates, enter `makeltx template --showall`.
 
 Special Thanks
