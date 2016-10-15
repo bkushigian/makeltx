@@ -5,17 +5,20 @@ import System.FilePath.Posix
 import Installer
 
 import Lib
+import Args
 import Latex
 import qualified XML
 
 main = do 
-  parsedArgs <- cmdArgs (modes [install, run, template])
+  parsedArgs <- cmdArgs (modes [install, generate, template])
   handleArgs parsedArgs
 
+-- Send XML name and description to stdout
 printNameAndDesc :: XML.Template -> IO ()
 printNameAndDesc t = do
   putStrLn $ XML.name_ t
   putStrLn $ XML.desc  t
+
 
 handleArgs :: Arguments -> IO ()
 handleArgs Install {}     = runInstaller
@@ -33,7 +36,7 @@ handleArgs a@Template {}
           XML.copyTemplate (head filt)
           
 
-handleArgs a@Run {}       
+handleArgs a@Generate {}       
   | getConfDir a = do
     mldir <- getAppUserDataDirectory programName
     putStrLn mldir

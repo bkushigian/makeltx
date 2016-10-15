@@ -9,12 +9,13 @@ import Data.List
 import System.IO
 import System.Directory
 import System.FilePath.Posix
+import Args
 
 import Lib
 
 texString :: Arguments -> String
 texString (Install {}) = error "Cannot form a LaTeX string while installing"
-texString a@Run {} = intercalate "\n" [ assembleFileHeader a
+texString a@Generate {} = intercalate "\n" [ assembleFileHeader a
                                , assemblePackages $ pkg a
                                , "\\author{" ++ author a ++ "}"
                                , "\\title{"  ++ title  a ++ "}"
@@ -53,8 +54,8 @@ texString a@Run {} = intercalate "\n" [ assembleFileHeader a
 
     assemblePackages = intercalate "\n" . map formPackageString
 templateString :: Arguments -> IO String
-templateString Install {} = error "Install is not a Template"
-templateString Run {}     = error "Run is not a Template"
+templateString Install {}    = error "Install is not a Template"
+templateString Generate {}   = error "Generate is not a Template"
 templateString a@Template {} = do
   appDir <- getAppUserDataDirectory programName 
   let filePath = appDir </> "templates" </> name_ a
@@ -72,8 +73,8 @@ writeTexToFile Template {} = error "writeTexToFile(Template)!! unimplemented"
 writeTexToFile a           = writeFile (fileName a) (texString a)
 
 writeTemplateToFile :: Arguments -> IO ()
-writeTemplateToFile Install {} = error "Install is not a template"
-writeTemplateToFile Run {}     = error "Run is not a template"
+writeTemplateToFile Install  {} = error "Install is not a template"
+writeTemplateToFile Generate {} = error "Run is not a template"
 writeTemplateToFile a = do 
   contents <- templateString a
   writeFile (fileName a) contents
