@@ -7,7 +7,8 @@ been tested on Ubuntu 16.04.
 
 ## Install
 
-You need to have Stack installed for this. Clone this repo or download the zip. Then
+You need to have Stack installed for this. Clone this repo or download the zip.
+Then
 ``` bash
 $ cd makeltx
 $ stack install        # create the makeltx executable
