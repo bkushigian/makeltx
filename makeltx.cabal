@@ -5,10 +5,10 @@ description:         Please see README.md
 homepage:            https://github.com/githubuser/makeltx#readme
 license:             BSD3
 license-file:        LICENSE
-author:              Author name here
-maintainer:          example@example.com
+author:              Ben Kushigian
+maintainer:          bkushigian@gmail.com
 copyright:           2016 Author name here
-category:            Web
+category:            Latex, Productivity
 build-type:          Custom
 -- extra-source-files:
 cabal-version:       >=1.10

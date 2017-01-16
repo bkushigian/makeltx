@@ -12,7 +12,7 @@ Then
 ``` bash
 $ cd makeltx
 $ stack install        # create the makeltx executable
-$ makeltx install      # create ~/.makeltx
+$ textools install     # create ~/.makeltx
 ```
 This will create an executable called `makeltx` in your stack path (you may need to add this to your `$PATH`
 environment variable, it should be in something like `~/.local/bin`).
@@ -26,7 +26,7 @@ Finally, you will need to get some templates. Unfortunately, template download i
 The easiest way to get started is to enter:
 
 ``` bash
-$ makeltx template --name MathHomework
+$ textools template --name MathHomework
 ```` 
 
 and it will create a brand new template for you! I'll be adding more templates soon.
